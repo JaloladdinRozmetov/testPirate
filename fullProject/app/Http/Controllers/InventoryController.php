@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class InventoryController extends Controller
 {
@@ -38,9 +39,19 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-        Inventory::create($request->all());
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'employee_id' => 'required|exists:employees,id',
+            'status' => 'required|in:opened,closed',
+        ]);
 
-        return redirect()->route('home')->with('success', 'Inventory created successfully.');
+        try {
+            Inventory::query()->create($validatedData);
+
+            return redirect()->route('home')->with('success', 'Inventory created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Error creating inventory: ' . $e->getMessage());
+        }
     }
 
     public function edit(Inventory $inventory)
@@ -52,9 +63,24 @@ class InventoryController extends Controller
 
     public function update(Request $request, Inventory $inventory)
     {
-        $inventory->update($request->all());
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'employee_id' => [
+                'required',
+                Rule::exists('employees', 'id')->where(function ($query) {
+                    $query->where('id', $this->input('employee_id'));
+                }),
+            ],
+            'status' => 'required|in:opened,closed',
+        ]);
 
-        return redirect()->route('home')->with('success', 'Inventory updated successfully.');
+        try {
+            $inventory->update($validatedData);
+
+            return redirect()->route('home')->with('success', 'Inventory updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'Error updating inventory: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Inventory $inventory)

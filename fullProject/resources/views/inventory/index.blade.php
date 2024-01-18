@@ -34,14 +34,14 @@
                             <td>{{ $inventory->status }}</td>
                             <td>
                                 <a href="{{ route('inventories.edit', $inventory) }}" class="btn btn-primary">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-pencil-alt"></i> Изменит
                                 </a>
 
                                 <form action="{{ route('inventories.destroy', $inventory) }}" method="post" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">
-                                        <i class="fas fa-trash"></i> Delete
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('А вы точно хотите удалит?')">
+                                        <i class="fas fa-trash"></i> Удалит
                                     </button>
                                 </form>
                             </td>

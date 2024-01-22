@@ -23,10 +23,19 @@ $ composer install
 $ php artisan migrate:fresh --seed
 ```
 
-### настройте сервер если нету запустите эту команду
+### добовления ключа в .env
 ```bash
-$ php artisan serve
+$ php artisan key:generate
 ```
-### Заходите по ссылке http://127.0.0.1:8000
+### устоновления npm
+```bash
+$ npm install
+```
+### устоновления npm
+```bash
+$ npm run dev
+```
+### настройте сервер
+
 ### логин : admin@email.com
 ### парол : password

@@ -10,7 +10,9 @@ class Rent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['first_date', 'last_date', 'client_id', 'inventory_id'];
+    protected $table='rent';
+
+    protected $fillable = ['first_date', 'last_date', 'client_id', 'inventory_id','rent_cost'];
 
 
     /**

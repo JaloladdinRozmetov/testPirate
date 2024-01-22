@@ -10,14 +10,8 @@ class CLient extends Model
 {
     use HasFactory;
 
+    protected $table = 'clients';
+
     protected $fillable = ['first_name','last_name'];
 
-
-    /**
-     * @return HasMany
-     */
-    public function rents(): HasMany
-    {
-        return $this->hasMany(Rent::class);
-    }
 }

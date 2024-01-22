@@ -14,6 +14,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ez3eyKVY3IO/dZ8HskNbpMGdaED6r4AATfXAgEwT+ayn5Zt1JdT+ZadUmRIY0C9F" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -32,9 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Инвентаря</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Сотрудники</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Заказчики</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Аренды</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('rents.index')}}">Аренды</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('bar.chart')}}">Статистика</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chart.employee')}}">По сотрудникам</a></li>
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
@@ -78,5 +81,8 @@
             @yield('content')
         </main>
     </div>
+
+    @stack('scripts')
+
 </body>
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Inventory extends Model
 {
@@ -16,12 +17,14 @@ class Inventory extends Model
 
 
     /**
-     * @return Collection|array
+     * @return HasMany
      */
-    public static function getOpenedInventories(): Collection|array
+    public function rents():HasMany
     {
-        return self::query()->where('status', 'opened')->get();
+        return $this->hasMany(Rent::class);
     }
+
+
 
     /**
      * @return BelongsTo
@@ -31,12 +34,4 @@ class Inventory extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    /**
-     * @param $inventoryId
-     * @return Builder|Builder[]|Collection|Model|null
-     */
-    public static function getInventoryWithEmployee($inventoryId): Model|Collection|Builder|array|null
-    {
-        return self::with('employee')->find($inventoryId);
-    }
 }
